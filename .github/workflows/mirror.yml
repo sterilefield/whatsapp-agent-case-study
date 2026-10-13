@@ -1,0 +1,25 @@
+# Push-mirror this repo to a second, independent host after every push to main.
+# Free: Codeberg (non-profit, Forgejo) or GitLab.com (push mirroring is free; pull mirroring is paid).
+# Dormant until the owner adds two repo secrets: MIRROR_URL (https://codeberg.org/<user>/<repo>.git)
+# and MIRROR_TOKEN (an access token created on the mirror host). Public showcase repos only.
+name: Mirror
+on:
+  push: { branches: [main] }
+  release: { types: [published] }
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  mirror:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with: { fetch-depth: 0 }
+      - name: Push all branches and tags
+        env:
+          MIRROR_URL: ${{ secrets.MIRROR_URL }}
+          MIRROR_TOKEN: ${{ secrets.MIRROR_TOKEN }}
+        run: |
+          if [ -z "$MIRROR_URL" ] || [ -z "$MIRROR_TOKEN" ]; then echo "Mirror not configured; skipping."; exit 0; fi
+          url="${MIRROR_URL/https:\/\//https://oauth2:${MIRROR_TOKEN}@}"
+          git push --prune "$url" '+refs/remotes/origin/*:refs/heads/*' '+refs/tags/*:refs/tags/*'

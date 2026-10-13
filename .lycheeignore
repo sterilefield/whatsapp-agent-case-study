@@ -1,0 +1,5 @@
+# LinkedIn blocks automated link checkers (HTTP 999) — checked by hand instead.
+linkedin\.com
+# GitHub-relative routes (../../discussions, security advisories) resolve only on github.com.
+/discussions$
+/security/advisories/new$

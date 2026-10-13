@@ -1,0 +1,9 @@
+cff-version: 1.2.0
+message: "If you use this work, please cite it as below."
+title: "WhatsApp agent case study: a 15-agent operations platform for a real-estate brokerage"
+authors:
+  - family-names: "Thiriveedhi"
+    given-names: "Ravi Teja"
+repository-code: "https://github.com/sterilefield/whatsapp-agent-case-study"
+version: "0.1.0"
+license: CC-BY-NC-ND-4.0
