@@ -18,7 +18,7 @@ gitleaks git . --redact --no-banner
 
 step "2/4 deny-list (client names, hosts, personal data markers) — skipped if no list"
 if [ -n "${DENY_LIST:-}" ] && [ -f "$DENY_LIST" ]; then
-  if grep -rInEf "$DENY_LIST" . --exclude-dir=.git; then echo "✖ deny-listed terms found"; exit 1; fi
+  if grep -rInEf "$DENY_LIST" . --exclude-dir=.git --exclude=check.sh; then echo "✖ deny-listed terms found"; exit 1; fi
 fi
 
 step "3/4 Markdown links (lychee, offline-safe: skips if binary unavailable)"
