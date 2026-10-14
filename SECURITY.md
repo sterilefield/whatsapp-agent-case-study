@@ -3,11 +3,13 @@
 ## Reporting a vulnerability
 
 Please report security issues **privately** through GitHub's
-[private vulnerability reporting](../../security/advisories/new) for this repository.
+[private vulnerability reporting](https://github.com/sterilefield/whatsapp-agent-case-study/security/advisories/new) for this repository,
+or email the maintainer at dr.raviteja1981.new@gmail.com with "SECURITY" in the subject.
 Do not open a public issue.
 
 You can expect an acknowledgement within 3 working days (IST, UTC+5:30) and a
-status update within 10 working days.
+status update within 10 working days. Fixes are disclosed in the release notes once
+they are in place (coordinated disclosure).
 
 ## Scope
 
