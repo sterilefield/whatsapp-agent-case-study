@@ -4,6 +4,11 @@
 
 Live since June 2026. Designed, built and operated by one architect directing AI coding agents. The client is anonymised; no customer data, code, prompts or configuration are published here. Figures are shared with the client's permission.
 
+> [!IMPORTANT]
+> **Status:** Anonymised case study of a live client system (in production since June 2026). Last verified 21 Oct 2026. Not for clinical use as-is. Scope and limits: [TRUST.md](TRUST.md).
+
+**[Architecture](docs/architecture.md) · [Human in charge](docs/human-in-charge.md) · [Agents and cost](docs/agents-and-cost.md) · [Lessons](docs/lessons.md) · [Trust](TRUST.md) · [All showcases](https://github.com/sterilefield) · [Contact](https://www.linkedin.com/in/dr-ravi-teja-thiriveedhi)**
+
 [![OpenSSF Scorecard](https://api.scorecard.dev/projects/github.com/sterilefield/whatsapp-agent-case-study/badge)](https://scorecard.dev/viewer/?uri=github.com/sterilefield/whatsapp-agent-case-study)
 
 ## Results
@@ -59,6 +64,19 @@ Three ideas carry the system:
 - [llm-token-economics](https://github.com/sterilefield/llm-token-economics): the 18 cost methods behind the −91 %.
 - [agent-governance-kit](https://github.com/sterilefield/agent-governance-kit): autonomy levels, risk classes and approval tiers.
 - [empire-os-reference-architecture](https://github.com/sterilefield/empire-os-reference-architecture): the platform these agents run on.
+
+## How this was built
+
+I write the specifications, architecture, acceptance criteria and review gates; AI coding agents (Claude Code and Codex) write most of the code under those specifications. I own every review, test gate, release decision and production operation. Text in this repository was drafted with AI assistance and passed gate G4, a review by a fresh-context AI agent that did not write it, before my own approval (G5).
+
+## Verify this release
+
+Every release carries a build-provenance attestation for its source archive and an SPDX SBOM.
+
+```bash
+gh release download v0.1.0 -R sterilefield/whatsapp-agent-case-study -p 'whatsapp-agent-case-study-v0.1.0.tar.gz'
+gh attestation verify whatsapp-agent-case-study-v0.1.0.tar.gz -R sterilefield/whatsapp-agent-case-study
+```
 
 ## Author
 
