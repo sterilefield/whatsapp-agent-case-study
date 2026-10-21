@@ -3,7 +3,10 @@
 All notable changes to this showcase. Public versions follow their own numbering, independent of the private source.
 
 ## [Unreleased]
+
+## [0.2.0] - 2026-10-21
 ### Added
+- Hero banner, animated recording of the live demo, release and attestation badges at the top of the README.
 - Live demo page (`site/`, GitHub Pages), runnable demo `demo/spine_demo.py` with tests, terminal recording and screenshots, Codespaces dev container.
 - Release workflow also attests the SPDX SBOM.
 - `TRUST.md` (scope, limitations, data provenance), `AGENTS.md`, `llms.txt`.
