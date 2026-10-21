@@ -32,7 +32,7 @@ jobs:
         with: { subject-path: "*.tar.gz", sbom-path: sbom.spdx.json }
       - name: Human-written notes from CHANGELOG.md
         run: |
-          awk -v v="${TAG#v}" '$0 ~ "^## \\[" v "\\]" {f=1; next} /^## \[/ {f=0} f' CHANGELOG.md > notes.md
+          awk -v v="${TAG#v}" 'index($0, "## [" v "]")==1 {f=1; next} /^## \[/ {f=0} f' CHANGELOG.md > notes.md
           [ -s notes.md ] || echo "See CHANGELOG.md." > notes.md
       - name: Create release (CHANGELOG notes first, then generated notes)
         env: { GH_TOKEN: "${{ github.token }}" }
