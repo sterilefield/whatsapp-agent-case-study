@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: Apache-2.0
-# Copyright 2026 Dr. Ravi Teja Thiriveedhi
+# Copyright 2026 Ravi Teja Thiriveedhi
 """Tests for demo/spine_demo.py (standard library unittest)."""
 import sys
 import unittest

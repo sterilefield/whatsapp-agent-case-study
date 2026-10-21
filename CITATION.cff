@@ -7,3 +7,4 @@ authors:
 repository-code: "https://github.com/sterilefield/whatsapp-agent-case-study"
 version: "0.1.0"
 license: CC-BY-NC-ND-4.0
+# Code in demo/ tests/ scripts/ site/: Apache-2.0 (LICENSE-CODE); see NOTICE. The citation licence above covers the documentation.

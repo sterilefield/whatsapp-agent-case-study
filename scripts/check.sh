@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # SPDX-License-Identifier: Apache-2.0
-# Copyright 2026 Dr. Ravi Teja Thiriveedhi
+# Copyright 2026 Ravi Teja Thiriveedhi
 # check.sh — every quality gate in one portable script.
 # Runs the same on a laptop, on GitHub Actions, GitLab CI, Codeberg (Forgejo Actions) or any CI.
 # CI files are thin wrappers around this script, so no check is locked to one platform.

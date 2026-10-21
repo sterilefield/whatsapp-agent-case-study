@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: Apache-2.0
-# Copyright 2026 Dr. Ravi Teja Thiriveedhi
+# Copyright 2026 Ravi Teja Thiriveedhi
 """Optional dev tool (needs Playwright and Pillow; not part of the checks).
 Record this showcase's live demo page (site/index.html) as an animated GIF, from real interactions.
 Frames are real screenshots of the page after each scripted step; nothing is drawn by hand."""

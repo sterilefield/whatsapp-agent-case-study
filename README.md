@@ -122,4 +122,4 @@ gh attestation verify verify-latest/whatsapp-agent-case-study-*.tar.gz -R steril
 
 Documentation in this repository is licensed under [CC BY-NC-ND 4.0](LICENSE). Share it with credit; no commercial use and no derivatives.
 
-Code in `demo/`, `tests/`, `scripts/` and `site/` is licensed under [Apache-2.0](LICENSE-CODE), so you can run, adapt and reuse it with attribution. The [NOTICE](NOTICE) file carries the healthcare and safety notice that travels with any copy.
+Code (source files in `demo/`, `tests/`, `scripts/` and `site/`, plus `.github/workflows/` and `.devcontainer/`) is licensed under [Apache-2.0](LICENSE-CODE), so you can run, adapt and reuse it with attribution. Everything else, including all Markdown, `docs/img`, `llms.txt` and `CITATION.cff`, is documentation under [CC BY-NC-ND 4.0](LICENSE). [NOTICE](NOTICE) holds the attribution notice Apache-2.0 asks redistributors to keep, plus a healthcare and safety notice.

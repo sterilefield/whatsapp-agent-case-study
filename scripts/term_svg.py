@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # SPDX-License-Identifier: Apache-2.0
-# Copyright 2026 Dr. Ravi Teja Thiriveedhi
+# Copyright 2026 Ravi Teja Thiriveedhi
 """term_svg: run a command and render its real output as an animated terminal SVG (light and dark).
 
 Usage:
