@@ -12,6 +12,11 @@ Sanitised public showcase by Dr. Ravi Teja Thiriveedhi (clinician turned AI syst
 - [docs/lessons.md](https://github.com/sterilefield/whatsapp-agent-case-study/blob/main/docs/lessons.md): Lessons from 129 bugs
 - [docs/timeline.md](https://github.com/sterilefield/whatsapp-agent-case-study/blob/main/docs/timeline.md): From first commit to live platform
 
+## Demo
+
+- [Owner approval desk](https://sterilefield.github.io/whatsapp-agent-case-study/): live demo on invented data
+- [demo/spine_demo.py](https://github.com/sterilefield/whatsapp-agent-case-study/blob/main/demo/spine_demo.py): runnable teaching model, standard library only
+
 ## Optional
 
 - [All showcases](https://github.com/sterilefield): the Sterile Field organisation

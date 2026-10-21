@@ -7,7 +7,7 @@
 Anonymised case study (documentation). Hiring managers, founders and engineers evaluating how a governed WhatsApp and Telegram agent platform is designed and operated.
 
 ## Out of scope
-It contains no code, prompts, configuration or customer data, and it does not claim the platform drove sales.
+It contains no production code, prompts, configuration or customer data, and it does not claim the platform drove sales. `demo/` and `site/` are small teaching models written for publication, on invented data.
 
 ## Limitations
 - One client, one market (Hyderabad real estate); results are not a benchmark.

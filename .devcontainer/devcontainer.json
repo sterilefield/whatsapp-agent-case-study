@@ -1,0 +1,6 @@
+{
+  "name": "showcase demo",
+  "image": "mcr.microsoft.com/devcontainers/python:3.12",
+  "postCreateCommand": "echo 'Run the demo: see README, section \"Try it\"'",
+  "customizations": { "codespaces": { "openFiles": ["README.md"] } }
+}

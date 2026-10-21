@@ -9,7 +9,7 @@ Live since June 2026. Designed, built and operated by one architect directing AI
 
 **[Architecture](docs/architecture.md) · [Human in charge](docs/human-in-charge.md) · [Agents and cost](docs/agents-and-cost.md) · [Lessons](docs/lessons.md) · [Trust](TRUST.md) · [All showcases](https://github.com/sterilefield) · [Contact](https://www.linkedin.com/in/dr-ravi-teja-thiriveedhi)**
 
-[![OpenSSF Scorecard](https://api.scorecard.dev/projects/github.com/sterilefield/whatsapp-agent-case-study/badge)](https://scorecard.dev/viewer/?uri=github.com/sterilefield/whatsapp-agent-case-study)
+[![CI](https://github.com/sterilefield/whatsapp-agent-case-study/actions/workflows/ci.yml/badge.svg)](https://github.com/sterilefield/whatsapp-agent-case-study/actions/workflows/ci.yml) [![Live demo](https://img.shields.io/badge/live_demo-open-1a7f37)](https://sterilefield.github.io/whatsapp-agent-case-study/) [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/sterilefield/whatsapp-agent-case-study) [![OpenSSF Scorecard](https://api.scorecard.dev/projects/github.com/sterilefield/whatsapp-agent-case-study/badge)](https://scorecard.dev/viewer/?uri=github.com/sterilefield/whatsapp-agent-case-study)
 
 ## Results
 
@@ -64,6 +64,30 @@ Three ideas carry the system:
 - [llm-token-economics](https://github.com/sterilefield/llm-token-economics): the 18 cost methods behind the −91 %.
 - [agent-governance-kit](https://github.com/sterilefield/agent-governance-kit): autonomy levels, risk classes and approval tiers.
 - [empire-os-reference-architecture](https://github.com/sterilefield/empire-os-reference-architecture): the platform these agents run on.
+
+## Try it
+
+**[Owner approval desk](https://sterilefield.github.io/whatsapp-agent-case-study/)**: approve or reject agent follow-ups, watch quiet hours hold messages, trigger human takeover, duplicate webhooks and a busy writer. It runs in your browser on invented data.
+
+<a href="https://sterilefield.github.io/whatsapp-agent-case-study/"><picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/img/demo-page-dark.png">
+  <img alt="Screenshot of the Owner approval desk demo page, showing invented data" src="docs/img/demo-page-light.png" width="100%">
+</picture></a>
+
+Or run the same logic yourself (Python 3, standard library only, nothing to install):
+
+```bash
+git clone https://github.com/sterilefield/whatsapp-agent-case-study.git
+cd whatsapp-agent-case-study
+python3 demo/spine_demo.py
+```
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/img/demo-terminal-dark.svg">
+  <img alt="Terminal recording of python3 demo/spine_demo.py: the real output of the demo" src="docs/img/demo-terminal-light.svg" width="100%">
+</picture>
+
+The terminal image is the real output of that command, rendered by `scripts/term_svg.py`. Everything in `demo/` and `site/` is a teaching model written for this repository on invented data. It is not production code, and the tests in `tests/` run on every pull request.
 
 ## How this was built
 

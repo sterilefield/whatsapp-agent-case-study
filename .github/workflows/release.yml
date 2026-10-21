@@ -28,6 +28,8 @@ jobs:
         with: { format: spdx-json, output-file: sbom.spdx.json }
       - uses: actions/attest-build-provenance@4d101475d8b20a2381f78447822ac1eab6504dd8 # v4
         with: { subject-path: "*.tar.gz" }
+      - uses: actions/attest-sbom@c604332985a26aa8cf1bdc465b92731239ec6b9e # v4.1.0
+        with: { subject-path: "*.tar.gz", sbom-path: sbom.spdx.json }
       - name: Create release with generated notes
         env: { GH_TOKEN: "${{ github.token }}" }
         run: |
