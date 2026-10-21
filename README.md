@@ -1,3 +1,8 @@
+<p align="center"><a href="https://sterilefield.github.io/whatsapp-agent-case-study/"><picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/img/hero-dark.svg">
+  <img alt="Banner: WhatsApp agent case study, with key figures from this README" src="docs/img/hero-light.svg" width="100%">
+</picture></a></p>
+
 # WhatsApp agent case study
 
 **A 15-agent WhatsApp and Telegram operations platform for a Hyderabad real-estate brokerage: how it was built to recover missed enquiries, keep a human in charge, and run AI at almost no marginal cost.**
@@ -9,7 +14,13 @@ Live since June 2026. Designed, built and operated by one architect directing AI
 
 **[Architecture](docs/architecture.md) · [Human in charge](docs/human-in-charge.md) · [Agents and cost](docs/agents-and-cost.md) · [Lessons](docs/lessons.md) · [Trust](TRUST.md) · [All showcases](https://github.com/sterilefield) · [Contact](https://www.linkedin.com/in/dr-ravi-teja-thiriveedhi)**
 
-[![CI](https://github.com/sterilefield/whatsapp-agent-case-study/actions/workflows/ci.yml/badge.svg)](https://github.com/sterilefield/whatsapp-agent-case-study/actions/workflows/ci.yml) [![Live demo](https://img.shields.io/badge/live_demo-open-1a7f37)](https://sterilefield.github.io/whatsapp-agent-case-study/) [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/sterilefield/whatsapp-agent-case-study) [![OpenSSF Scorecard](https://api.scorecard.dev/projects/github.com/sterilefield/whatsapp-agent-case-study/badge)](https://scorecard.dev/viewer/?uri=github.com/sterilefield/whatsapp-agent-case-study)
+[![CI](https://github.com/sterilefield/whatsapp-agent-case-study/actions/workflows/ci.yml/badge.svg)](https://github.com/sterilefield/whatsapp-agent-case-study/actions/workflows/ci.yml) [![Live demo](https://img.shields.io/badge/live_demo-open-1a7f37)](https://sterilefield.github.io/whatsapp-agent-case-study/) [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/sterilefield/whatsapp-agent-case-study) [![OpenSSF Scorecard](https://api.scorecard.dev/projects/github.com/sterilefield/whatsapp-agent-case-study/badge)](https://scorecard.dev/viewer/?uri=github.com/sterilefield/whatsapp-agent-case-study) [![Latest release](https://img.shields.io/github/v/release/sterilefield/whatsapp-agent-case-study?label=release)](https://github.com/sterilefield/whatsapp-agent-case-study/releases/latest) [![Attested builds](https://img.shields.io/badge/releases-attested_%2B_SBOM-1a7f37)](#verify-this-release)
+
+### See it in action
+
+<a href="https://sterilefield.github.io/whatsapp-agent-case-study/"><img alt="Animated recording of the Owner approval desk live demo: real interactions on invented data" src="docs/img/demo.gif" width="100%"></a>
+
+<sub>Recorded from the live demo page with scripted clicks, on invented data. [Open the demo](https://sterilefield.github.io/whatsapp-agent-case-study/) to try it yourself.</sub>
 
 ## Results
 
@@ -95,11 +106,11 @@ I write the specifications, architecture, acceptance criteria and review gates; 
 
 ## Verify this release
 
-Every release carries a build-provenance attestation for its source archive and an SPDX SBOM.
+Every release carries a build-provenance attestation for its source archive and an SPDX SBOM (the SBOM is attested too from v0.2.0). These commands fetch the latest release:
 
 ```bash
-gh release download v0.1.0 -R sterilefield/whatsapp-agent-case-study -p 'whatsapp-agent-case-study-v0.1.0.tar.gz'
-gh attestation verify whatsapp-agent-case-study-v0.1.0.tar.gz -R sterilefield/whatsapp-agent-case-study
+gh release download -R sterilefield/whatsapp-agent-case-study -p '*.tar.gz' -p 'sbom.spdx.json'
+gh attestation verify whatsapp-agent-case-study-*.tar.gz -R sterilefield/whatsapp-agent-case-study
 ```
 
 ## Author

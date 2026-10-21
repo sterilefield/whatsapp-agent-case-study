@@ -1,0 +1,3 @@
+# The live demo page is documentation, not the project language
+site/** linguist-documentation
+docs/img/** linguist-generated
