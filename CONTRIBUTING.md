@@ -1,6 +1,6 @@
 # Contributing
 
-Thanks for helping. Issues and documentation fixes are welcome; contributions are accepted under the repository licence.
+Thanks for helping. Issues and documentation fixes are welcome; contributions are accepted under the licences described below.
 
 ## Ground rules
 
@@ -18,3 +18,7 @@ Thanks for helping. Issues and documentation fixes are welcome; contributions ar
 
 Run `bash scripts/check.sh` before opening a pull request. Maintainers also run it with `DENY_LIST` set to a private list of client terms before every release. CI runs the same script:
 a full-history secret scan, a link check and any project tests.
+
+## Licensing of contributions
+
+Code contributions are accepted under Apache-2.0 (inbound = outbound). By contributing documentation you license it to the author under CC BY 4.0, so it can be included in the CC BY-NC-ND 4.0 documentation.

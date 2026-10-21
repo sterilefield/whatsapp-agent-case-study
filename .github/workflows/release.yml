@@ -30,11 +30,15 @@ jobs:
         with: { subject-path: "*.tar.gz" }
       - uses: actions/attest-sbom@c604332985a26aa8cf1bdc465b92731239ec6b9e # v4.1.0
         with: { subject-path: "*.tar.gz", sbom-path: sbom.spdx.json }
-      - name: Create release with generated notes
+      - name: Human-written notes from CHANGELOG.md
+        run: |
+          awk -v v="${TAG#v}" 'index($0, "## [" v "]")==1 {f=1; next} /^## \[/ {f=0} f' CHANGELOG.md > notes.md
+          [ -s notes.md ] || echo "See CHANGELOG.md." > notes.md
+      - name: Create release (CHANGELOG notes first, then generated notes)
         env: { GH_TOKEN: "${{ github.token }}" }
         run: |
           if [ "$GITHUB_EVENT_NAME" = "workflow_dispatch" ]; then
-            gh release create "$TAG" *.tar.gz sbom.spdx.json --target "$GITHUB_SHA" --title "$TAG" --generate-notes
+            gh release create "$TAG" *.tar.gz sbom.spdx.json --target "$GITHUB_SHA" --title "$TAG" --notes-file notes.md --generate-notes
           else
-            gh release create "$TAG" *.tar.gz sbom.spdx.json --generate-notes --verify-tag
+            gh release create "$TAG" *.tar.gz sbom.spdx.json --notes-file notes.md --generate-notes --verify-tag
           fi
