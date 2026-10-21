@@ -34,5 +34,10 @@ if [ -f requirements.txt ]; then
   # Hash-pinned dependencies only (OpenSSF Scorecard: Pinned-Dependencies)
   python3 -m pip install -q --require-hashes -r requirements.txt 2>/dev/null || python3 -m pip install -q --break-system-packages --require-hashes -r requirements.txt
   python3 -m pytest -q
+elif [ -d tests ]; then
+  python3 -m unittest discover -s tests -q
+fi
+if [ -d demo ]; then
+  for d in demo/*.py; do python3 "$d" > /dev/null; done
 fi
 echo "✅ all checks passed"

@@ -3,3 +3,7 @@ linkedin\.com
 # GitHub-relative routes (../../discussions, security advisories) resolve only on github.com.
 /discussions$
 /security/advisories/new$
+# Live demo on GitHub Pages: deployed by .github/workflows/pages.yml after merge, so a pull request cannot check it yet.
+^https://sterilefield\.github\.io/
+# Codespaces launch links redirect to a sign-in page for checkers.
+^https://codespaces\.new/
