@@ -37,15 +37,15 @@
     <h2>Single-writer event log</h2>
     <p class="dim" style="margin:0 0 6px;font-size:13px">Every write from every source goes through one writer, in order. Duplicate webhook deliveries are ignored by message id.</p>
     <div class="row" style="margin-bottom:8px"><button id="dup">Webhook delivers m-7 twice</button><button id="busy">Writer busy: spool 2 writes</button><button id="undo">Undo last owner note</button></div>
-    <pre id="log" class="mono"></pre>
+    <pre id="log" class="mono" aria-live="polite"></pre>
   </section>
 </div>
-<footer>A teaching mock written for this repository; the production dashboard, code and data are private and the client is anonymised. <a href="https://github.com/sterilefield/whatsapp-agent-case-study/blob/main/TRUST.md">Scope and limits</a>.</footer>
+<footer>A teaching mock written for this repository, not for clinical use; the production dashboard, code and data are private and the client is anonymised. <a href="https://github.com/sterilefield/whatsapp-agent-case-study/blob/main/TRUST.md">Scope and limits</a>.</footer>
 </main>
 <script>
 const leads=[{id:"lead-001",name:"Synthetic lead A",heat:"hot",stage:"new",takeover:false},{id:"lead-002",name:"Synthetic lead B",heat:"warm",stage:"site-visit",takeover:false},{id:"lead-003",name:"Synthetic lead C",heat:"warm",stage:"new",takeover:false},{id:"lead-004",name:"Synthetic lead D",heat:"cool",stage:"follow-up",takeover:false}];
-const TEMPLATES={warm_follow_up:"Hello! Just checking whether you had a chance to look at the options we shared. Happy to answer any questions.",site_visit_reminder:"Reminder: your site visit is tomorrow at 11:00. Reply here if you need to change the time.",recommend_property:"Based on what you told us, here is one more option that matches your budget and area."};
-let queue=[{lead:"lead-001",tpl:"warm_follow_up",by:"follow-up-agent"},{lead:"lead-002",tpl:"site_visit_reminder",by:"scheduler-agent"}],held=[],spool=[],seen=new Set(),undo=[],busy=false;
+const TEMPLATES={demo_template_1:"[Invented demo text] Hello, this is a follow-up message.",demo_template_2:"[Invented demo text] A reminder about your appointment.",demo_template_3:"[Invented demo text] One more option you may like."};
+let queue=[{lead:"lead-001",tpl:"demo_template_1",by:"follow-up-agent"},{lead:"lead-002",tpl:"demo_template_2",by:"scheduler-agent"}],held=[],spool=[],seen=new Set(),undo=[],busy=false;
 const $=id=>document.getElementById(id);const hh=()=>String($("clock").value).padStart(2,"0")+":00";const quiet=()=>{const h=+$("clock").value;return h>=21||h<9};
 function log(t){$("log").textContent+=hh()+"  "+t+"\n";$("log").scrollTop=1e9}
 function write(src,desc,fn){if(busy){spool.push([src,desc,fn]);log("SPOOL   writer busy: "+src+" "+desc+" spooled ("+spool.length+" waiting)");return}fn();}
@@ -59,11 +59,11 @@ function render(){
   document.querySelectorAll("[data-take]").forEach(b=>b.onclick=()=>{const l=leads.find(x=>x.id===b.dataset.take);write("staff-phone","takeover",()=>{l.takeover=!l.takeover;log(l.takeover?"HOLD    staff replied to "+l.id+": agents step back for 24 h":"OK      takeover ended for "+l.id);if(l.takeover){const n=queue.length;queue=queue.filter(q=>q.lead!==l.id);if(n>queue.length)log("HOLD    "+(n-queue.length)+" agent follow-up(s) for "+l.id+" withdrawn")}render()})});
   document.querySelectorAll("[data-note]").forEach(b=>b.onclick=()=>{const l=leads.find(x=>x.id===b.dataset.note);write("owner-telegram","note",()=>{undo.push([l.id,l.stage]);log("OK      owner note: "+l.id+" stage "+l.stage+" → site-visit (undo handle U"+String(undo.length).padStart(3,"0")+")");l.stage="site-visit";render()})});
 }
-function decide(i,ok){const q=queue[i];write("owner-dashboard",ok?"approve":"reject",()=>{queue.splice(i,1);if(!ok)log("REJECTED owner rejected "+q.tpl+" for "+q.lead);else if(quiet()){held.push(q);log("HOLD    approved "+q.tpl+" for "+q.lead+": quiet hours, held until 09:00")}else log("SENT    approved; "+q.tpl+" to "+q.lead+" sent (simulated)");render()})}
+function decide(i,ok){const q=queue[i];write("owner-dashboard",ok?"approve":"reject",()=>{const at=queue.indexOf(q);if(at<0)return;queue.splice(at,1);if(!ok)log("REJECTED owner rejected "+q.tpl+" for "+q.lead);else if(quiet()){held.push(q);log("HOLD    approved "+q.tpl+" for "+q.lead+": quiet hours, held until 09:00")}else log("SENT    approved; "+q.tpl+" to "+q.lead+" sent (simulated)");render()})}
 $("clock").oninput=()=>{if(!quiet()&&held.length){log("SENT    quiet hours over: "+held.length+" held message(s) sent (simulated)");held=[]}render()};
 $("propose").onclick=()=>{const free=leads.filter(l=>!l.takeover);const l=free[Math.floor(Math.random()*free.length)];const tpls=Object.keys(TEMPLATES);if(!l){log("HOLD    every lead is in human takeover; agents propose nothing");return}const t=tpls[Math.floor(Math.random()*tpls.length)];write("follow-up-agent","propose",()=>{queue.push({lead:l.id,tpl:t,by:"follow-up-agent"});log("WAIT    follow-up-agent proposed "+t+" for "+l.id+": waiting for owner");render()})};
 $("dup").onclick=()=>{for(let k=0;k<2;k++)write("webhook","inbound m-7",()=>{if(seen.has("m-7"))log("OK      duplicate delivery of m-7 ignored (idempotent by message id)");else{seen.add("m-7");log("OK      inbound m-7 from lead-003: \"Is parking included?\"")}})};
-$("busy").onclick=()=>{busy=true;write("webhook","inbound m-8",()=>log("OK      inbound m-8 from lead-004 stored"));write("scheduler-agent","propose",()=>{queue.push({lead:"lead-004",tpl:"recommend_property",by:"scheduler-agent"});log("WAIT    scheduler-agent proposed recommend_property for lead-004");render()});setTimeout(()=>{busy=false;const s=spool;spool=[];s.forEach(([, ,fn])=>fn());log("replay  "+s.length+" spooled write(s) applied");render()},1200)};
+$("busy").onclick=()=>{busy=true;write("webhook","inbound m-8",()=>log("OK      inbound m-8 from lead-004 stored"));write("scheduler-agent","propose",()=>{queue.push({lead:"lead-004",tpl:"demo_template_3",by:"scheduler-agent"});log("WAIT    scheduler-agent proposed demo_template_3 for lead-004");render()});setTimeout(()=>{busy=false;const s=spool;spool=[];s.forEach(([, ,fn])=>fn());log("replay  "+s.length+" spooled write(s) applied");render()},1200)};
 $("undo").onclick=()=>{const u=undo.pop();if(!u){log("OK      nothing to undo");return}write("owner-telegram","undo",()=>{const l=leads.find(x=>x.id===u[0]);log("OK      undo: "+l.id+" stage back to "+u[1]);l.stage=u[1];render()})};
 log("OK      dashboard opened; 2 follow-ups waiting for approval");render();
 </script>

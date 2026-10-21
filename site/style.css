@@ -6,7 +6,7 @@ a{color:var(--accent)}main{max-width:1040px;margin:0 auto;padding:24px 16px 48px
 header h1{font-size:26px;margin:0 0 4px}header p{margin:0;color:var(--dim)}
 .chips{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0 0}.chip{background:var(--chip);border:1px solid var(--line);border-radius:999px;padding:2px 10px;font-size:13px;color:var(--dim)}
 .chip.warn{background:var(--warnbg);color:var(--warn);border-color:transparent;font-weight:600}
-.grid{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));margin-top:20px}
+.grid{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(min(340px,100%),1fr));margin-top:20px}
 .card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:16px;min-width:0}.card h2{font-size:16px;margin:0 0 10px}
 .wide{grid-column:1/-1}label{display:block;font-size:13px;color:var(--dim);margin:10px 0 4px}
 select,input[type=number],input[type=range]{width:100%;font:inherit;color:var(--fg);background:var(--bg);border:1px solid var(--line);border-radius:6px;padding:6px 8px}
@@ -23,3 +23,4 @@ table{border-collapse:collapse;width:100%;font-size:13px}th,td{border-bottom:1px
 .bar{height:22px;border-radius:4px;background:var(--accent);min-width:2px;transition:width .3s}.bar.after{background:var(--ok)}
 .row{display:flex;gap:12px;flex-wrap:wrap}.row>*{flex:1 1 140px}
 .big{font-size:28px;font-weight:700}
+@media (prefers-reduced-motion:reduce){.bar{transition:none}}

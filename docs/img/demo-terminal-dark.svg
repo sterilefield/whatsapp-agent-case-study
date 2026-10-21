@@ -1,13 +1,13 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="843" height="518" viewBox="0 0 843 518" role="img" aria-label="demo/spine_demo.py">
+<svg xmlns="http://www.w3.org/2000/svg" width="897" height="518" viewBox="0 0 897 518" role="img" aria-label="demo/spine_demo.py">
 <title>demo/spine_demo.py</title>
 <style>text{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:13px;white-space:pre}.l{opacity:0;animation:show .01s linear forwards}@keyframes show{to{opacity:1}}@media (prefers-reduced-motion:reduce){.l{animation:none;opacity:1}}</style>
-<rect x=".5" y=".5" width="842" height="517" rx="8" fill="#0d1117" stroke="#30363d"/>
-<path d="M1 30h841" stroke="#30363d"/>
-<rect x="1" y="1" width="841" height="29" rx="7" fill="#161b22"/>
+<rect x=".5" y=".5" width="896" height="517" rx="8" fill="#0d1117" stroke="#30363d"/>
+<path d="M1 30h895" stroke="#30363d"/>
+<rect x="1" y="1" width="895" height="29" rx="7" fill="#161b22"/>
 <circle cx="22" cy="15.0" r="6" fill="#ff5f57"/>
 <circle cx="40" cy="15.0" r="6" fill="#febc2e"/>
 <circle cx="58" cy="15.0" r="6" fill="#28c840"/>
-<text x="421.5" y="19.0" text-anchor="middle" fill="#9198a1">demo/spine_demo.py</text>
+<text x="448.5" y="19.0" text-anchor="middle" fill="#9198a1">demo/spine_demo.py</text>
 <text class="l" style="animation-delay:0.00s" x="16" y="61.2" fill="#9198a1" xml:space="preserve">$ python3 demo/spine_demo.py</text>
 <text class="l" style="animation-delay:0.18s" x="16" y="80.2" fill="#e6edf3" xml:space="preserve">WhatsApp agent case study: teaching model on invented leads (synthetic, not real)</text>
 <text class="l" style="animation-delay:0.36s" x="16" y="99.2" fill="#e6edf3" xml:space="preserve">--------------------------------------------------------------------------------------------</text>
@@ -15,14 +15,14 @@
 <text class="l" style="animation-delay:0.72s" x="16" y="137.2" fill="#3fb950" xml:space="preserve">Mon 10:00  OK      inbound m-1 from lead-001: &quot;Is the 2BHK still available?&quot;</text>
 <text class="l" style="animation-delay:0.90s" x="16" y="156.2" fill="#3fb950" xml:space="preserve">Mon 10:00  OK      duplicate delivery of m-1 ignored (idempotent by message id)</text>
 <text class="l" style="animation-delay:1.08s" x="16" y="175.2" fill="#3fb950" xml:space="preserve">Mon 10:05  OK      new lead lead-002 (Synthetic lead B) from webhook</text>
-<text class="l" style="animation-delay:1.26s" x="16" y="194.2" fill="#d29922" xml:space="preserve">Mon 10:05  WAIT    follow-up-agent proposed template &#x27;warm_follow_up&#x27; for lead-001: waiting for owner ap</text>
+<text class="l" style="animation-delay:1.26s" x="16" y="194.2" fill="#d29922" xml:space="preserve">Mon 10:05  WAIT    follow-up-agent proposed template &#x27;demo_template_1&#x27; for lead-001: waiting for owner approval</text>
 <text class="l" style="animation-delay:1.44s" x="16" y="213.2" fill="#3fb950" xml:space="preserve">Mon 10:20  SENT    owner approved; follow-up to lead-001 sent (simulated)</text>
 <text class="l" style="animation-delay:1.62s" x="16" y="232.2" fill="#d29922" xml:space="preserve">Mon 11:00  HOLD    staff replied to lead-002: agents step back until Tue 11:00</text>
 <text class="l" style="animation-delay:1.80s" x="16" y="251.2" fill="#d29922" xml:space="preserve">Mon 11:00  HOLD    follow-up-agent follow-up for lead-002 dropped: human takeover active</text>
 <text class="l" style="animation-delay:1.98s" x="16" y="270.2" fill="#d29922" xml:space="preserve">Mon 14:00  SPOOL   writer busy, webhook inbound spooled (1 waiting)</text>
 <text class="l" style="animation-delay:2.16s" x="16" y="289.2" fill="#d29922" xml:space="preserve">Mon 14:00  SPOOL   writer busy, scheduler-agent propose_followup spooled (2 waiting)</text>
 <text class="l" style="animation-delay:2.34s" x="16" y="308.2" fill="#3fb950" xml:space="preserve">Mon 14:01  OK      inbound m-3 from lead-001: &quot;Can I visit on Saturday?&quot;</text>
-<text class="l" style="animation-delay:2.52s" x="16" y="327.2" fill="#d29922" xml:space="preserve">Mon 14:01  WAIT    scheduler-agent proposed template &#x27;site_visit_reminder&#x27; for lead-001: waiting for own</text>
+<text class="l" style="animation-delay:2.52s" x="16" y="327.2" fill="#d29922" xml:space="preserve">Mon 14:01  WAIT    scheduler-agent proposed template &#x27;demo_template_2&#x27; for lead-001: waiting for owner approval</text>
 <text class="l" style="animation-delay:2.70s" x="16" y="346.2" fill="#e6edf3" xml:space="preserve">Mon 14:01  replay  2 spooled write(s) applied</text>
 <text class="l" style="animation-delay:2.88s" x="16" y="365.2" fill="#3fb950" xml:space="preserve">Mon 14:01  OK      owner note: lead-001 stage new -&gt; site-visit (undo handle U001)</text>
 <text class="l" style="animation-delay:3.06s" x="16" y="384.2" fill="#d29922" xml:space="preserve">Mon 14:01  WAIT    owner note &#x27;mark lead-002 lost&#x27; is sensitive or ambiguous: asked the owner to confirm</text>

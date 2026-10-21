@@ -4,7 +4,7 @@
     python3 demo/spine_demo.py            # run the scripted day and print the event log
     python3 demo/spine_demo.py --db x.db  # keep the SQLite file to inspect it
 
-It shows, in about 250 lines of standard-library Python:
+It shows, in about 200 lines of standard-library Python:
   * one writer: every producer (webhook, agents, owner dashboard) sends writes to a single writer;
   * idempotent inbound messages keyed by message id (a duplicate webhook delivery is ignored);
   * a spool: when the writer cannot get the lock in time, writes are spooled and replayed;
@@ -98,7 +98,9 @@ class Writer:
                 until = (self.now + TAKEOVER).isoformat()
                 self.db.execute("INSERT OR IGNORE INTO messages VALUES (?,?,?,?,?)", (a["msg_id"], a["lead"], "out-staff", a["body"], ts))
                 self.db.execute("UPDATE leads SET takeover_until=? WHERE id=?", (until, a["lead"]))
-                self.say(f"HOLD    staff replied to {a['lead']}: agents step back until {self.now + TAKEOVER:%a %H:%M}")
+                n = self.db.execute("UPDATE outbox SET status='withdrawn' WHERE lead_id=? AND status='pending_approval'", (a["lead"],)).rowcount
+                self.say(f"HOLD    staff replied to {a['lead']}: agents step back until {self.now + TAKEOVER:%a %H:%M}"
+                         + (f"; {n} queued follow-up(s) withdrawn" if n else ""))
             elif w.op == "propose_followup":
                 row = self.db.execute("SELECT takeover_until FROM leads WHERE id=?", (a["lead"],)).fetchone()
                 if row and row[0] and row[0] > ts:
@@ -144,10 +146,13 @@ FIELD_SQL = {"stage": ("SELECT stage FROM leads WHERE id=?", "UPDATE leads SET s
 ALLOWED_FIELDS = set(FIELD_SQL)
 
 
+SENSITIVE = {"lost", "do-not-contact", "opted-out", "deleted"}
+
+
 def owner_note(text: str) -> Write | None:
     """Apply a note only when it is unambiguous: one lead id plus one known field. Anything else asks first."""
     parts = text.split()
-    if len(parts) == 3 and parts[0].startswith("lead-") and parts[1] in ALLOWED_FIELDS and parts[2] not in ("lost", "do-not-contact"):
+    if len(parts) == 3 and parts[0].startswith("lead-") and parts[1] in ALLOWED_FIELDS and parts[2] not in SENSITIVE:
         return Write("owner-telegram", "owner_note", {"lead": parts[0], "field": parts[1], "value": parts[2]})
     return None
 
@@ -168,16 +173,16 @@ def scripted_day(db_path: str | None = None) -> Writer:
     w.submit(Write("webhook", "inbound", {"lead": "lead-001", "msg_id": "m-1", "body": "Is the 2BHK still available?"}))
     at(10, 5)
     w.submit(Write("webhook", "new_lead", {"lead": "lead-002", "name": "Synthetic lead B"}))
-    w.submit(Write("follow-up-agent", "propose_followup", {"lead": "lead-001", "template": "warm_follow_up"}))
+    w.submit(Write("follow-up-agent", "propose_followup", {"lead": "lead-001", "template": "demo_template_1"}))
     at(10, 20)
     w.submit(Write("owner-dashboard", "owner_decides", {"lead": "lead-001", "decision": "approve"}))
     at(11, 0)
     w.submit(Write("staff-phone", "staff_reply", {"lead": "lead-002", "msg_id": "m-2", "body": "Calling you now"}))
-    w.submit(Write("follow-up-agent", "propose_followup", {"lead": "lead-002", "template": "warm_follow_up"}))
+    w.submit(Write("follow-up-agent", "propose_followup", {"lead": "lead-002", "template": "demo_template_1"}))
     at(14, 0)
     w.lock_available = False
     w.submit(Write("webhook", "inbound", {"lead": "lead-001", "msg_id": "m-3", "body": "Can I visit on Saturday?"}))
-    w.submit(Write("scheduler-agent", "propose_followup", {"lead": "lead-001", "template": "site_visit_reminder"}))
+    w.submit(Write("scheduler-agent", "propose_followup", {"lead": "lead-001", "template": "demo_template_2"}))
     at(14, 1)
     w.lock_available = True
     w.replay()

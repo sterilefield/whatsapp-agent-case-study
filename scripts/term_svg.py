@@ -5,7 +5,7 @@ Usage:
     python3 scripts/term_svg.py OUT_PREFIX "TITLE" -- COMMAND [ARGS...]
 
 Writes OUT_PREFIX-light.svg and OUT_PREFIX-dark.svg. Lines appear one after another, then stay.
-Standard library only. The output shown is exactly what the command printed (ANSI codes stripped).
+Standard library only. The output shown is exactly what the command printed (ANSI codes stripped); long lines wrap, as in a terminal.
 """
 from __future__ import annotations
 
@@ -19,7 +19,7 @@ THEMES = {
     "light": {"bg": "#ffffff", "bar": "#eaeef2", "fg": "#1f2328", "dim": "#59636e", "ok": "#1a7f37", "bad": "#cf222e", "warn": "#9a6700", "border": "#d1d9e0"},
     "dark": {"bg": "#0d1117", "bar": "#161b22", "fg": "#e6edf3", "dim": "#9198a1", "ok": "#3fb950", "bad": "#f85149", "warn": "#d29922", "border": "#30363d"},
 }
-LINE_H, CHAR_W, PAD, BAR_H, MAX_COLS = 19, 7.8, 16, 30, 104
+LINE_H, CHAR_W, PAD, BAR_H, MAX_COLS = 19, 7.8, 16, 30, 120
 
 
 def colour(line: str, t: dict) -> str:
@@ -37,7 +37,13 @@ def colour(line: str, t: dict) -> str:
 
 def render(lines: list[str], title: str, theme: str, step: float = 0.18) -> str:
     t = THEMES[theme]
-    lines = [l[:MAX_COLS] for l in lines]
+    # Wrap long lines like a terminal does (nothing is cut off); colour follows the original line.
+    wrapped = []
+    for l in lines:
+        c = colour(l, t)
+        for k in range(0, max(len(l), 1), MAX_COLS):
+            wrapped.append((l[k:k + MAX_COLS], c))
+    lines = [w for w, _ in wrapped]
     width = int(PAD * 2 + CHAR_W * max(60, max((len(l) for l in lines), default=60)))
     height = BAR_H + PAD + LINE_H * len(lines) + PAD
     out = [
@@ -56,7 +62,7 @@ def render(lines: list[str], title: str, theme: str, step: float = 0.18) -> str:
     for i, line in enumerate(lines):
         y = BAR_H + PAD + LINE_H * (i + 0.8)
         out.append(
-            f'<text class="l" style="animation-delay:{i*step:.2f}s" x="{PAD}" y="{y:.1f}" fill="{colour(line, t)}" xml:space="preserve">{html.escape(line)}</text>'
+            f'<text class="l" style="animation-delay:{i*step:.2f}s" x="{PAD}" y="{y:.1f}" fill="{wrapped[i][1]}" xml:space="preserve">{html.escape(line)}</text>'
         )
     out.append("</svg>")
     return "\n".join(out) + "\n"
