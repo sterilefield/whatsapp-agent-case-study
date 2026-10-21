@@ -1,5 +1,5 @@
 """Optional dev tool (needs Playwright and Pillow; not part of the checks).
-Record each showcase's live demo page (site/index.html) as an animated GIF, from real interactions.
+Record this showcase's live demo page (site/index.html) as an animated GIF, from real interactions.
 Frames are real screenshots of the page after each scripted step; nothing is drawn by hand."""
 import io, sys, pathlib
 from PIL import Image
@@ -8,24 +8,6 @@ from playwright.sync_api import sync_playwright
 ROOT = pathlib.Path(__file__).resolve().parent.parent  # this repository
 SET_SELECT = "(id,v)=>{const e=document.getElementById(id);e.value=v;e.dispatchEvent(new Event('change',{bubbles:true}))}"
 STEPS = {
-    "agent-governance-kit": [
-        ("", "main", 1600),
-        ("document.getElementById('level').value='L3';document.getElementById('level').dispatchEvent(new Event('change'))", "main", 1400),
-        ("document.getElementById('action').value='read';document.getElementById('action').dispatchEvent(new Event('change'))", "main", 1200),
-        ("document.getElementById('action').value='delete_records';document.getElementById('action').dispatchEvent(new Event('change'))", "main", 1400),
-        ("document.getElementById('kill').checked=true;document.getElementById('kill').dispatchEvent(new Event('change'))", "main", 1600),
-        ("document.getElementById('kill').checked=false;document.getElementById('kill').dispatchEvent(new Event('change'));document.getElementById('play').click()", "#play", 300, 14),
-        ("", "#log", 2400),
-    ],
-    "llm-token-economics": [
-        ("", "main", 1600),
-        ("(()=>{const i=document.querySelectorAll('#fleet tbody tr')[0].querySelectorAll('input')[4];i.value=120;i.dispatchEvent(new Event('input'))})()", "main", 1300),
-        ("(()=>{const i=document.querySelectorAll('#fleet tbody tr')[1].querySelectorAll('input')[4];i.value=360;i.dispatchEvent(new Event('input'))})()", "main", 1300),
-        ("(()=>{const i=document.querySelectorAll('#fleet tbody tr')[3].querySelectorAll('input')[4];i.value=1440;i.dispatchEvent(new Event('input'))})()", "main", 1300),
-        ("(()=>{const i=document.getElementById('price');i.value=2.5;i.dispatchEvent(new Event('input'))})()", "main", 1500),
-        ("document.getElementById('reset').click()", "#whatif", 1200),
-        ("(()=>{const i=document.getElementById('wInt');i.value=30;i.dispatchEvent(new Event('input'))})()", "#whatif", 1800),
-    ],
     "whatsapp-agent-case-study": [
         ("", "main", 1600),
         ("document.querySelector('[data-ok]').click()", "main", 1300),
@@ -37,22 +19,11 @@ STEPS = {
         ("document.getElementById('busy').click()", "#log", 400, 4),
         ("", "#log", 2200),
     ],
-    "empire-os-reference-architecture": [
-        ("", "main", 1600),
-        ("document.querySelectorAll('[data-s]')[5].click()", "main", 1500),
-        ("document.querySelectorAll('[data-s]')[5].click()", "main", 1200),
-        ("document.getElementById('addBatch').click()", "main", 1100),
-        ("document.getElementById('addBatch').click()", "main", 1300),
-        ("document.getElementById('finish').click()", "main", 1400),
-        ("document.getElementById('kill').click()", "#klog", 1300),
-        ("document.getElementById('act').click()", "#klog", 1200),
-        ("document.getElementById('restoreAgent').click()", "#klog", 1200),
-        ("document.getElementById('restoreOwner').click();document.getElementById('act').click()", "#klog", 2000),
-    ],
 }
 
 
-def record(repo, width=1100, height=760, out_w=880):
+def record(repo, width=1100, height=None, out_w=880):
+    height = height or (980 if repo == "whatsapp-agent-case-study" else 760)
     frames, durations = [], []
     with sync_playwright() as p:
         b = p.chromium.launch()
@@ -66,11 +37,15 @@ def record(repo, width=1100, height=760, out_w=880):
             if js:
                 pg.evaluate(js)
             if anchor != "main":
-                pg.evaluate(f"document.querySelector('{anchor}').scrollIntoView({{block:'center'}})")
+                sel, _, blk = anchor.partition("|")
+                pg.evaluate(f"document.querySelector('{sel}').scrollIntoView({{block:'{blk or 'center'}'}})")
             else:
                 pg.evaluate("window.scrollTo(0,0)")
             for _ in range(repeat):
                 pg.wait_for_timeout(260)
+                if anchor != "main":
+                    sel, _, blk = anchor.partition("|")
+                    pg.evaluate(f"document.querySelector('{sel}').scrollIntoView({{block:'{blk or 'center'}'}})")
                 img = Image.open(io.BytesIO(pg.screenshot())).convert("RGB")
                 img = img.resize((out_w, int(img.height * out_w / img.width)), Image.LANCZOS)
                 frames.append(img)

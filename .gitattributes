@@ -1,3 +1,4 @@
 # The live demo page is documentation, not the project language
 site/** linguist-documentation
+# Generated or hand-made images: collapsed in diffs, never counted as code
 docs/img/** linguist-generated

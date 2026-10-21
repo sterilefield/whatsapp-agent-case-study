@@ -1,23 +1,8 @@
-"""Generate light/dark hero banners (SVG) for the four showcases. Facts come from each README."""
+"""Optional tool: regenerate this repository's light/dark hero banner (SVG). Every figure comes from the README."""
 import html, pathlib
 
 HEROES = {
-    "empire-os-reference-architecture": dict(
-        eyebrow="REFERENCE ARCHITECTURE", title="Empire OS",
-        tagline="One person runs 9 governed AI agents on a 2012 Mac mini, with test-gated releases.",
-        stats=[("9", "governed agents"), ("99/99", "release-gate suites"), ("1,026", "tests, 0 failing")]),
-    "agent-governance-kit": dict(
-        eyebrow="FRAMEWORK · TEMPLATES · CHECKER", title="Agent governance kit",
-        tagline="Autonomy levels, risk classes, approval tiers, kill switches and an audit spine for AI agents.",
-        stats=[("L0–L4", "autonomy levels"), ("R0–R4", "risk classes"), ("3", "standards mapped")]),
-    "llm-token-economics": dict(
-        eyebrow="CASE STUDY · PLAYBOOK", title="LLM token economics",
-        tagline="How a 15-agent production fleet cut heartbeat tokens from 12.0 M to 1.0 M a day.",
-        stats=[("−91%", "heartbeat tokens"), ("18", "published methods"), ("76%", "tokens from cache")]),
-    "whatsapp-agent-case-study": dict(
-        eyebrow="ANONYMISED CASE STUDY · LIVE SINCE JUNE 2026", title="WhatsApp agent platform",
-        tagline="A governed 15-agent WhatsApp and Telegram operations platform with a human in charge.",
-        stats=[("460+", "leads handled"), ("284", "owner-approved follow-ups"), ("129", "bugs closed with lessons")]),
+    'whatsapp-agent-case-study': dict(eyebrow='ANONYMISED CASE STUDY · LIVE SINCE JUNE 2026', title='WhatsApp agent platform', tagline='A governed 15-agent WhatsApp and Telegram operations platform with a human in charge.', stats=[('460+', 'leads handled'), ('284', 'owner-approved follow-ups'), ('129', 'bugs closed with lessons')]),
 }
 T = {
     "light": dict(bg1="#ffffff", bg2="#f3f7fb", border="#d1d9e0", fg="#1f2328", dim="#59636e", accent="#0969da", tile="#f6f8fa", tileb="#d1d9e0", num="#1a7f37", glow="#0969da"),
