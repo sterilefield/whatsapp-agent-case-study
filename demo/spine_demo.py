@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+# SPDX-License-Identifier: Apache-2.0
+# Copyright 2026 Dr. Ravi Teja Thiriveedhi
 """spine_demo: a small, runnable model of the case study's design ideas, on invented leads.
 
     python3 demo/spine_demo.py            # run the scripted day and print the event log

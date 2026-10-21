@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright 2026 Dr. Ravi Teja Thiriveedhi
 """Optional tool: regenerate this repository's light/dark hero banner (SVG). Every figure comes from the README."""
 import html, pathlib
 

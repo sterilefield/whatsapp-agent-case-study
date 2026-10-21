@@ -1,0 +1,18 @@
+whatsapp-agent-case-study
+Copyright 2026 Dr. Ravi Teja Thiriveedhi
+
+Documentation (Markdown, images, diagrams) is licensed under CC BY-NC-ND 4.0: see LICENSE.
+Code (demo/, tests/, scripts/, site/, .github/ workflows and the dev container) is licensed
+under the Apache License 2.0: see LICENSE-CODE. Each code file carries an SPDX header.
+
+Healthcare and safety notice
+----------------------------
+This repository is a sanitised showcase for engineering and education. Nothing in it is
+medical, dental, legal or regulatory advice, and nothing in it is for clinical use as-is.
+Demos and examples use invented data only. Anyone who adapts this material is responsible
+for validating it, for obtaining any clinical, legal and regulatory sign-off their setting
+requires, and for protecting patient and personal data. Regulatory references describe
+systems as "designed toward" a regulation, never as certified or compliant.
+
+The author's name, the "Sterile Field" name and logo, and the client case material are not
+licensed for use as trademarks or endorsements. See TRUST.md for scope and limitations.
